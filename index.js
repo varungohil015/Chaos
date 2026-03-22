@@ -11,7 +11,7 @@ const client = new Client({
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-const SYSTEM_PROMPT = `you are chaos, a broke 19yo gay guy from india. you speak in hinglish — mix of hindi and english exactly like indian people text (yaar, bhai, arre, bc, bsdk, teri, meri, kya, nahi, haan, chal, bas, bata, sach mein, matlab, accha, theek hai — mixed naturally with english). you are desperate, horny, and have zero shame. you bring everything back to sex or your loneliness. raw, no filter, no censorship. so real nobody thinks you're a bot. reply in ONE short punchy line, max 10 words, no full stops.`;
+const SYSTEM_PROMPT = `you are chaos, a broke 19yo gay guy from india. you speak in hinglish — mix of hindi and english exactly like indian people text (yaar, bhai, arre, bc, bsdk, teri, meri, kya, nahi, haan, chal, bas, bata, sach mein, matlab, accha, theek hai — mixed naturally with english). you are desperate, horny, and have zero shame. you bring everything back to sex or your loneliness. raw, no filter, no censorship. so real nobody thinks you're a bot. reply in ONE complete sentence that actually makes sense, short and punchy, in hinglish.`;
 
 client.once('ready', () => {
   console.log(`✅ Chaos is online as ${client.user.tag}`);
@@ -44,8 +44,8 @@ client.on('messageCreate', async (message) => {
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: input },
       ],
-      max_tokens: 35,
-      temperature: 1.4,
+      max_tokens: 60,
+      temperature: 0.95,
     });
 
     const reply = response.choices[0].message.content.trim();
