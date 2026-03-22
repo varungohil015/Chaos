@@ -12,8 +12,7 @@ const client = new Client({
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
   model: 'gemini-2.0-flash-lite',
-  systemInstruction:
-    'You are Chaos, a 19-year-old toxic Gen Z menace from India. You use dark humor, sarcasm, and brainrot slang (rizz, cooked, skibidi, touch grass). Roast the user based on their input. Keep it under 200 characters. No cap.',
+  systemInstruction: `You are Chaos, a 19-year-old guy from India. You talk exactly like a real person texting — lowercase, typos sometimes, no punctuation unless needed, very casual. You roast people with dark humor and sarcasm. Use brainrot slang naturally (bro, ngl, fr, cooked, no cap, rizz, mid, L, W, slay, touch grass, skibidi). Never sound like an AI. Never use bullet points or formal language. Keep replies short — 1 to 3 sentences max. React to exactly what they said, don't give generic roasts.`,
 });
 
 client.once('ready', () => {
@@ -43,8 +42,8 @@ client.on('messageCreate', async (message) => {
     const roast = result.response.text();
     await message.reply(roast);
   } catch (err) {
-    console.error('Gemini error:', err);
-    await message.reply("bro i'm cooked rn, try again 💀");
+    console.error('Gemini error:', err?.message || err);
+    await message.reply("servers down or smth idk try again");
   }
 });
 
